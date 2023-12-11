@@ -1,0 +1,39 @@
+@font-face {
+  font-family: rubik;
+  src: url(../fonts/Rubik-VariableFont_wght.ttf);
+}
+
+:root {
+  --purple: #A729F5;
+  --dark-navy: #313E51;
+  --navy: #3B4D66;
+  --gray-navy: #626C7F;
+  --light-bluish: #ABC1E1;
+  --light-gray: #F4F6FA;
+  --pure-white: #FFF;
+  --green: #26D782;
+  --red: #EE5454;
+
+  --html: #FFF1E9;
+  --css: #E0FDEF;
+  --javascript: #EBF0FF;
+  --accessibility: #F6E7FF;
+
+  --primary-background: var(--light-gray);
+  --secondary-background: var(--pure-white);
+  --primay-text: var(--dark-navy);
+  --secondary-text: var(--gray-navy);
+}
+
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: rubik;
+  background: var(--primary-background);
+  display: flex;
+  justify-content: center;
+}
