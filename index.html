@@ -20,14 +20,14 @@
       </div>
 
       <div class="switch">
-        <img src="./assets/images/icon-moon-dark.svg" alt="moon">
+        <img src="./assets/images/icon-sun-dark.svg" alt="moon">
         <label for="toggle" class="toggle">
           <input type="checkbox" id="toggle" class="toggle__input">
           <div class="toggle__fill">
             <div class="toggle__select"></div>
           </div>
         </label>
-        <img src="./assets/images/icon-sun-dark.svg" alt="sun">
+        <img src="./assets/images/icon-moon-dark.svg" alt="sun">
       </div>
     </header>
 
@@ -59,6 +59,45 @@
             <span class="quiz-banner__text"></span>
           </div>
         </div>
+      </section>
+
+      <section class="quiz">
+        <div class="question">
+          <div class="question__count">
+            Question <span class="current"></span> of <span class="end"></span>
+          </div>
+  
+          <div class="question__current"></div>
+        </div>
+
+        <div class="progress">
+          <div class="progress__meter"></div>
+        </div>
+
+        <div class="answers">
+          <input type="hidden" class="answer__active">
+          <div class="answer">
+            <div class="answer__selection">A</div>
+            <span class="answer__text"></span>
+          </div>
+
+          <div class="answer">
+            <div class="answer__selection">B</div>
+            <span class="answer__text"></span>
+          </div>
+
+          <div class="answer">
+            <div class="answer__selection">C</div>
+            <span class="answer__text"></span>
+          </div>
+
+          <div class="answer">
+            <div class="answer__selection">D</div>
+            <span class="answer__text"></span>
+          </div>
+        </div>
+
+        <button class="answer__btn">Submit Answer</button>
       </section>
     </main>
   </div>
