@@ -199,6 +199,13 @@ body {
 .answer__text {
   margin-left: 12px;
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.answer__text > img {
+  width: 24px;
 }
 
 .answer__btn {
@@ -211,4 +218,43 @@ body {
   border-radius: 12px;
   font-size: 18px;
   font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.answer__active {
+  border: 2px solid var(--purple);
+}
+
+.answer__active > .answer__selection {
+  background: var(--purple);
+  color: var(--pure-white);
+}
+
+.correct {
+  border-color: var(--green);
+}
+
+.correct > .answer__selection {
+  background: var(--green);
+}
+
+.incorrect {
+  border-color: var(--red);
+}
+
+.incorrect > .answer__selection {
+  background: var(--red);
+}
+
+.error {
+  color: var(--red);
+  font-size: 18px;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.error > img {
+  width: 24px;
+  margin-right: 8px;
 }
