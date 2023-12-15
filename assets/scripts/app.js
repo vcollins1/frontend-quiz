@@ -9,6 +9,7 @@ const answerBtn = document.querySelector(".answer__btn");
 const progressMeter = document.querySelector(".progress__meter");
 const playAgain = document.querySelector(".play-again");
 const toggleSwitch = document.querySelector(".toggle");
+const toggleInput = document.querySelector(".toggle__input");
 let numCorrect = 0;
 let curNum = 1;
 let maxNum;
@@ -45,6 +46,18 @@ fetch("./data.json").then(response => {
         });
     });
 });
+
+toggleSwitch.addEventListener("click", () => {
+    if (toggleInput.checked) {
+        document.body.classList.add("dark");
+        document.querySelector(".sun").src = "./assets/images/icon-sun-light.svg";
+        document.querySelector(".moon").src = "./assets/images/icon-moon-light.svg";
+    } else {
+        document.body.classList.remove("dark");
+        document.querySelector(".sun").src = "./assets/images/icon-sun-dark.svg";
+        document.querySelector(".moon").src = "./assets/images/icon-moon-dark.svg";
+    }
+})
 
 answerSelections.forEach(selection => {
     selection.addEventListener("click", activeAns);
@@ -138,6 +151,8 @@ playAgain.addEventListener("click", () => {
     document.querySelector(".menu").style.display = "block";
     document.querySelector(".result").style.display = "none";
     quizHeader.classList.remove("html", "css", "accessibility", "javascript");
+    quizHeader.querySelector(".quiz-banner__img").src = '';
+    quizHeader.querySelector(".quiz-banner__text").innerText = '';
     document.querySelector(".quiz-banner--result").classList.remove("html", "css", "accessibility", "javascript");
     curNum = 1;
     numCorrect = 0;

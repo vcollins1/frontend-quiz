@@ -19,10 +19,12 @@
   --javascript: #EBF0FF;
   --accessibility: #F6E7FF;
 
-  --primary-background: var(--light-gray);
-  --secondary-background: var(--pure-white);
+  --primary-background-color: var(--light-gray);
+  --secondary-background-color: var(--pure-white);
   --primay-text: var(--dark-navy);
   --secondary-text: var(--gray-navy);
+
+  --primary-background-img: url("../images/pattern-background-mobile-light.svg");
 }
 
 *, *::after, *::before {
@@ -33,7 +35,7 @@
 
 body {
   font-family: rubik;
-  background: var(--primary-background);
+  background: var(--primary-background-color);
   color: var(--primay-text);
   display: flex;
   justify-content: center;
@@ -42,7 +44,7 @@ body {
 .container {
   width: 375px;
   height: 812px;
-  background-image: url("../images/pattern-background-mobile-light.svg");
+  background-image: var(--primary-background-img);
 }
 
 .header {
@@ -96,7 +98,7 @@ body {
 }
 
 .quiz-banner--select {
-  background: var(--pure-white);
+  background: var(--secondary-background-color);
   padding: 12px;
   border-radius: 12px;
   margin-bottom: 12px;
@@ -152,7 +154,7 @@ body {
 
 .progress {
   height: 16px;
-  background: var(--pure-white);
+  background: var(--secondary-background-color);
   border-radius: 16px;
   padding: 4px;
   position: relative;
@@ -174,14 +176,14 @@ body {
   font-size: 14px;
   font-style: italic;
   font-weight: 100;
-  color: var(--gray-navy);
+  color: var(--secondary-text);
   margin-bottom: 12px;
 }
 
 .answer {
   display: flex;
   align-items: center;
-  background: var(--pure-white);
+  background: var(--secondary-background-color);
   border-radius: 12px;
   margin-bottom: 12px;
   padding: 12px;
@@ -193,6 +195,7 @@ body {
   text-align: center;
   line-height: 40px;
   background: var(--light-gray);
+  color: var(--dark-navy);
   border-radius: 5px;
 }
 
@@ -277,6 +280,7 @@ body {
 .score {
   height: 242px;
   background: var(--pure-white);
+  color: var(--dark-navy);
   border-radius: 12px;
   padding: 32px;
   margin-bottom: 12px;
@@ -304,4 +308,12 @@ body {
 .out-of {
   font: 18px;
   color: var(--gray-navy);
+}
+
+.dark {
+  --primary-background-color: var(--dark-navy);
+  --secondary-background-color: var(--navy);
+  --primay-text: var(--pure-white);
+  --secondary-text: var(--light-bluish);
+  --primary-background-img: url("../images/pattern-background-mobile-dark.svg");
 }
