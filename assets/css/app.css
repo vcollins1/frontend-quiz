@@ -162,7 +162,7 @@ body {
 .progress__meter {
   background: var(--purple);
   height: 8px;
-  width: 10%;
+  width: 0%;
   border-radius: 8px;
 }
 

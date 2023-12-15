@@ -6,7 +6,9 @@ const curQuesNum = document.querySelector(".current");
 const maxQuesNum = document.querySelector(".end");
 const options = document.querySelectorAll(".answer__text > span");
 const answerBtn = document.querySelector(".answer__btn");
-let curNum = 2;
+const progressMeter = document.querySelector(".progress__meter");
+let numCorrect = 0;
+let curNum = 1;
 let maxNum;
 
 let data;
@@ -46,99 +48,62 @@ answerSelections.forEach(selection => {
 });
 
 answerBtn.addEventListener("click", e => {
-    if (quizHeader.classList.contains("html")) {
-        const correctAns = data[0]["questions"][curNum - 1]["answer"];
-        const userAns = document.querySelector(".answer__active > .answer__text > span");
-        if (userAns === null) {
-            document.querySelector(".error").style.display = "flex";
-        } else {
-            document.querySelector(".error").style.display = "none";
-            answerSelections.forEach(selection => {
-                selection.removeEventListener("click", activeAns);
-            });
-            if (correctAns === userAns.innerText) {
-                document.querySelector(".answer__active > .answer__text > img").src = "./assets/images/icon-correct.svg";
-                document.querySelector(".answer__active").classList.add("correct");
-                answerBtn.innerText = "Next Question";
-            } else {
-                document.querySelector(".answer__active > .answer__text > img").src = "./assets/images/icon-incorrect.svg";
-                document.querySelector(".answer__active").classList.add("incorrect");
-                document.querySelector(".right").src = "./assets/images/icon-correct.svg";
-                answerBtn.innerText = "Next Question";
-            }
+    if (e.target.classList.contains("next-question")) {
+        answerBtn.classList.toggle("next-question");
+        curNum += 1;
+        progressMeter.style.width = `${(curNum / maxNum) * 100}%`;
+
+        if (curNum > maxNum) {
+            console.log(`You got ${numCorrect} right.`);
+            return;
         }
-    }
+        resetSelections();
 
-    if (quizHeader.classList.contains("css")) {
-        const correctAns = data[1]["questions"][curNum - 1]["answer"];
-        const userAns = document.querySelector(".answer__active > .answer__text > span");
-
-        if (userAns === null) {
-            document.querySelector(".error").style.display = "flex";
-        } else {
-            document.querySelector(".error").style.display = "none";
-            answerSelections.forEach(selection => {
-                selection.removeEventListener("click", activeAns);
-            });
-            if (correctAns === userAns.innerText) {
-                document.querySelector(".answer__active > .answer__text > img").src = "./assets/images/icon-correct.svg";
-                document.querySelector(".answer__active").classList.add("correct");
-                answerBtn.innerText = "Next Question";
-            } else {
-                document.querySelector(".answer__active > .answer__text > img").src = "./assets/images/icon-incorrect.svg";
-                document.querySelector(".answer__active").classList.add("incorrect");
-                document.querySelector(".right").src = "./assets/images/icon-correct.svg";
-                answerBtn.innerText = "Next Question";
-            }
+        if (quizHeader.classList.contains("html")) {
+            updateQuestion(data[0]);
         }
-    }
-
-    if (quizHeader.classList.contains("javascript")) {
-        const correctAns = data[2]["questions"][curNum - 1]["answer"];
-        const userAns = document.querySelector(".answer__active > .answer__text > span");
-
-        if (userAns === null) {
-            document.querySelector(".error").style.display = "flex";
-        } else {
-            document.querySelector(".error").style.display = "none";
-            answerSelections.forEach(selection => {
-                selection.removeEventListener("click", activeAns);
-            });
-            if (correctAns === userAns.innerText) {
-                document.querySelector(".answer__active > .answer__text > img").src = "./assets/images/icon-correct.svg";
-                document.querySelector(".answer__active").classList.add("correct");
-                answerBtn.innerText = "Next Question";
-            } else {
-                document.querySelector(".answer__active > .answer__text > img").src = "./assets/images/icon-incorrect.svg";
-                document.querySelector(".answer__active").classList.add("incorrect");
-                document.querySelector(".right").src = "./assets/images/icon-correct.svg";
-                answerBtn.innerText = "Next Question";
-            }
+    
+        if (quizHeader.classList.contains("css")) {
+            updateQuestion(data[1]);
         }
-    }
-
-    if (quizHeader.classList.contains("accessibility")) {
-        const correctAns = data[3]["questions"][curNum - 1]["answer"];
-        const userAns = document.querySelector(".answer__active > .answer__text > span");
-
-        if (userAns === null) {
-            document.querySelector(".error").style.display = "flex";
-        } else {
-            document.querySelector(".error").style.display = "none";
-            answerSelections.forEach(selection => {
-                selection.removeEventListener("click", activeAns);
-            });
-            if (correctAns === userAns.innerText) {
-                document.querySelector(".answer__active > .answer__text > img").src = "./assets/images/icon-correct.svg";
-                document.querySelector(".answer__active").classList.add("correct");
-                answerBtn.innerText = "Next Question";
-            } else {
-                document.querySelector(".answer__active > .answer__text > img").src = "./assets/images/icon-incorrect.svg";
-                document.querySelector(".answer__active").classList.add("incorrect");
-                document.querySelector(".right").src = "./assets/images/icon-correct.svg";
-                answerBtn.innerText = "Next Question";
-            }
+    
+        if (quizHeader.classList.contains("javascript")) {
+            updateQuestion(data[2]);
         }
+    
+        if (quizHeader.classList.contains("accessibility")) {
+            updateQuestion(data[3]);
+        }
+
+        answerSelections.forEach(selection => {
+            selection.addEventListener("click", activeAns);
+        });
+
+        answerBtn.innerText = "Submit Answer";
+    } else {
+        if (curNum > maxNum) {
+            return;
+        }
+
+        let err;
+        if (quizHeader.classList.contains("html")) {
+            err = answerCheck(data[0]);
+        }
+    
+        if (quizHeader.classList.contains("css")) {
+            err = answerCheck(data[1]);
+        }
+    
+        if (quizHeader.classList.contains("javascript")) {
+            err = answerCheck(data[2]);
+        }
+    
+        if (quizHeader.classList.contains("accessibility")) {
+            err = answerCheck(data[3]);
+        }
+
+        if (!err)
+            answerBtn.classList.toggle("next-question");
     }
 });
 
@@ -158,11 +123,57 @@ function loadQuestionPage(quiz) {
     head.classList.add(quiz["title"].toLowerCase());
     head.querySelector(".quiz-banner__img").src = `${quiz["icon"]}`;
     head.querySelector(".quiz-banner__text").innerText = quiz["title"];
+    maxQuesNum.innerHTML = quiz["questions"].length;
+    maxNum = quiz["questions"].length;
+    progressMeter.style.width = `${(curNum / maxNum) * 100}%`;
     document.querySelector(".quiz").style.display = "block";
 
+    updateQuestion(quiz);
+}
+
+function answerCheck(quiz) {
+    const userAns = document.querySelector(".answer__active > .answer__text > span");
+    const correctAns = quiz["questions"][curNum - 1]["answer"];
+    if (userAns === null) {
+        document.querySelector(".error").style.display = "flex";
+        return true;
+    } else {
+        document.querySelector(".error").style.display = "none";
+        answerSelections.forEach(selection => {
+            selection.removeEventListener("click", activeAns);
+        });
+        if (correctAns === userAns.innerText) {
+            numCorrect += 1;
+            document.querySelector(".answer__active > .answer__text > img").src = "./assets/images/icon-correct.svg";
+            document.querySelector(".answer__active").classList.add("correct");
+        } else {
+            document.querySelector(".answer__active > .answer__text > img").src = "./assets/images/icon-incorrect.svg";
+            document.querySelector(".answer__active").classList.add("incorrect");
+            document.querySelector(".right").src = "./assets/images/icon-correct.svg";
+        }
+
+        if (curNum >= maxNum)
+            answerBtn.innerText = "Results";
+        else
+            answerBtn.innerText = "Next Question";
+    }
+
+    return false;
+}
+
+function resetSelections() {
+    document.querySelector(".answer__active").classList.remove("incorrect");
+    document.querySelector(".right").src = "";
+    document.querySelector(".right").classList.remove("right");
+    document.querySelector(".answer__active > .answer__text > img").src = "";
+    document.querySelector(".answer__active").classList.remove("correct");
+    document.querySelector(".answer__active").classList.remove("answer__active");
+    document.querySelector("input[type=hidden]").classList.add("answer__active");
+}
+
+function updateQuestion(quiz) {
     curQuesNum.innerHTML = curNum;
-    maxQuesNum.innerHTML = quiz["questions"].length;
-    question.innerHTML = quiz["questions"][curNum - 1]["question"];
+    question.innerText = quiz["questions"][curNum - 1]["question"];
 
     const answers = quiz["questions"][curNum - 1]["options"];
     options.forEach((option, i) => {
@@ -170,5 +181,5 @@ function loadQuestionPage(quiz) {
 
         if (answers[i] === quiz["questions"][curNum - 1]["answer"])
             option.nextElementSibling.classList.add("right");
-    })
+    });
 }
