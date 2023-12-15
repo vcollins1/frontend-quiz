@@ -8,8 +8,9 @@ const options = document.querySelectorAll(".answer__text > span");
 const answerBtn = document.querySelector(".answer__btn");
 const progressMeter = document.querySelector(".progress__meter");
 let numCorrect = 0;
-let curNum = 1;
+let curNum = 10;
 let maxNum;
+let quiz;
 
 let data;
 fetch("./data.json").then(response => {
@@ -50,14 +51,38 @@ answerSelections.forEach(selection => {
 answerBtn.addEventListener("click", e => {
     if (e.target.classList.contains("next-question")) {
         answerBtn.classList.toggle("next-question");
+        resetSelections();
         curNum += 1;
-        progressMeter.style.width = `${(curNum / maxNum) * 100}%`;
-
         if (curNum > maxNum) {
-            console.log(`You got ${numCorrect} right.`);
+
+            if (quizHeader.classList.contains("html")) {
+                quiz = data[0];
+            }
+        
+            if (quizHeader.classList.contains("css")) {
+                quiz = data[1];
+            }
+        
+            if (quizHeader.classList.contains("javascript")) {
+                quiz = data[2];
+            }
+        
+            if (quizHeader.classList.contains("accessibility")) {
+                quiz = data[3];
+            }
+
+            const head = document.querySelector(".quiz-banner--result");
+            head.classList.add(quiz["title"].toLowerCase());
+            head.querySelector(".quiz-banner__img").src = `${quiz["icon"]}`;
+            head.querySelector(".quiz-banner__text").innerText = quiz["title"];
+            document.querySelector(".mark").innerText = numCorrect;
+            document.querySelector(".out-of span").innerText = maxNum;
+            document.querySelector(".quiz").style.display = "none";
+            document.querySelector(".result").style.display = "block";
+
             return;
         }
-        resetSelections();
+        progressMeter.style.width = `${(curNum / maxNum) * 100}%`;
 
         if (quizHeader.classList.contains("html")) {
             updateQuestion(data[0]);

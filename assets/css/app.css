@@ -208,7 +208,8 @@ body {
   width: 24px;
 }
 
-.answer__btn {
+.answer__btn,
+.play-again {
   width: 100%;
   height: 56px;
   padding: 12px;
@@ -257,4 +258,50 @@ body {
 .error > img {
   width: 24px;
   margin-right: 8px;
+}
+
+.result {
+  display: none;
+}
+
+.result__msg {
+  margin-bottom: 40px;
+  font-size: 40px;
+  font-weight: 300;
+}
+
+.result__msg span {
+  font-weight: 500;
+}
+
+.score {
+  height: 242px;
+  background: var(--pure-white);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 12px;
+}
+
+.quiz-banner--result {
+  width: 167px;
+  margin: 0 auto 16px;
+}
+
+.score__user {
+  width: 267px;
+  height: 122px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.mark {
+  height: 88px;
+  font-size: 88px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.out-of {
+  font: 18px;
+  color: var(--gray-navy);
 }
