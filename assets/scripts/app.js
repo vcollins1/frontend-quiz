@@ -11,7 +11,7 @@ const playAgain = document.querySelector(".play-again");
 const toggleSwitch = document.querySelector(".toggle");
 const toggleInput = document.querySelector(".toggle__input");
 let numCorrect = 0;
-let curNum = 1;
+let curNum = 5;
 let maxNum;
 let quiz;
 
