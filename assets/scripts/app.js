@@ -7,8 +7,10 @@ const maxQuesNum = document.querySelector(".end");
 const options = document.querySelectorAll(".answer__text > span");
 const answerBtn = document.querySelector(".answer__btn");
 const progressMeter = document.querySelector(".progress__meter");
+const playAgain = document.querySelector(".play-again");
+const toggleSwitch = document.querySelector(".toggle");
 let numCorrect = 0;
-let curNum = 10;
+let curNum = 1;
 let maxNum;
 let quiz;
 
@@ -130,6 +132,19 @@ answerBtn.addEventListener("click", e => {
         if (!err)
             answerBtn.classList.toggle("next-question");
     }
+});
+
+playAgain.addEventListener("click", () => {
+    document.querySelector(".menu").style.display = "block";
+    document.querySelector(".result").style.display = "none";
+    quizHeader.classList.remove("html", "css", "accessibility", "javascript");
+    document.querySelector(".quiz-banner--result").classList.remove("html", "css", "accessibility", "javascript");
+    curNum = 1;
+    numCorrect = 0;
+    answerBtn.innerText = "Submit Answer";
+    answerSelections.forEach(selection => {
+        selection.addEventListener("click", activeAns);
+    });
 });
 
 function activeAns(e) {
