@@ -93,7 +93,7 @@ answerBtn.addEventListener("click", e => {
             document.querySelector(".mark").innerText = numCorrect;
             document.querySelector(".out-of span").innerText = maxNum;
             document.querySelector(".quiz").style.display = "none";
-            document.querySelector(".result").style.display = "block";
+            document.querySelector(".result").style.display = "flex";
 
             return;
         }
@@ -181,7 +181,7 @@ function loadQuestionPage(quiz) {
     maxQuesNum.innerHTML = quiz["questions"].length;
     maxNum = quiz["questions"].length;
     progressMeter.style.width = `${(curNum / maxNum) * 100}%`;
-    document.querySelector(".quiz").style.display = "block";
+    document.querySelector(".quiz").style.display = "flex";
 
     updateQuestion(quiz);
 }
