@@ -11,7 +11,7 @@ const playAgain = document.querySelector(".play-again");
 const toggleSwitch = document.querySelector(".toggle");
 const toggleInput = document.querySelector(".toggle__input");
 let numCorrect = 0;
-let curNum = 5;
+let curNum = 1;
 let maxNum;
 let quiz;
 
@@ -163,6 +163,10 @@ playAgain.addEventListener("click", () => {
 });
 
 function activeAns(e) {
+
+    /*
+    Function to mark the current active answer selected
+    */
     document.querySelector(".answer__active").classList.remove("answer__active");
 
     if (e.target.parentElement.classList.contains("answer"))
@@ -174,6 +178,10 @@ function activeAns(e) {
 }
 
 function loadQuestionPage(quiz) {
+    /*
+        Loads the question page selected by tghe user from
+        the main menu.
+    */
     const head = document.querySelector(".quiz-banner--header");
     head.classList.add(quiz["title"].toLowerCase());
     head.querySelector(".quiz-banner__img").src = `${quiz["icon"]}`;
@@ -187,6 +195,9 @@ function loadQuestionPage(quiz) {
 }
 
 function answerCheck(quiz) {
+    /*
+        Checks the users selected answer
+    */
     const userAns = document.querySelector(".answer__active > .answer__text > span");
     const correctAns = quiz["questions"][curNum - 1]["answer"];
     if (userAns === null) {
@@ -217,6 +228,10 @@ function answerCheck(quiz) {
 }
 
 function resetSelections() {
+    /*
+        Resets the answer activity from the previous question
+        before displaying the next question.
+    */
     document.querySelector(".answer__active").classList.remove("incorrect");
     document.querySelector(".right").src = "";
     document.querySelector(".right").classList.remove("right");
@@ -227,6 +242,9 @@ function resetSelections() {
 }
 
 function updateQuestion(quiz) {
+    /*
+        Update question and displays answer options
+    */
     curQuesNum.innerHTML = curNum;
     question.innerText = quiz["questions"][curNum - 1]["question"];
 

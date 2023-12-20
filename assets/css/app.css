@@ -13,6 +13,7 @@
   --pure-white: #FFF;
   --green: #26D782;
   --red: #EE5454;
+  --button-hover: rgba(167, 41, 245, 0.5);
 
   --html: #FFF1E9;
   --css: #E0FDEF;
@@ -47,19 +48,50 @@ body {
   background-image: var(--primary-background-img);
 }
 
+.main {
+  padding: 32px 24px 0;
+}
+
+/********************************
+HEADER
+*********************************/
+
 .header {
   display: flex;
   justify-content: space-between;
   padding: 16px 24px;
 }
 
-.main {
-  padding: 32px 24px 0;
+.quiz-banner {
+  display: flex;
+  align-items: center;
 }
 
-.quiz {
-  display: none;
-  flex-direction: column;
+.quiz-banner__img {
+  padding: 5.71px;
+  border-radius: 5px;
+  margin-right: 16px;
+  width: 40px;
+}
+
+.html > .quiz-banner__img {
+  background: var(--html);
+}
+
+.css > .quiz-banner__img {
+  background: var(--css);
+}
+
+.javascript > .quiz-banner__img {
+  background: var(--javascript);
+}
+
+.accessibility > .quiz-banner__img {
+  background: var(--accessibility);
+}
+
+.quiz-banner__text {
+  flex: 1;
 }
 
 .switch {
@@ -93,45 +125,9 @@ body {
   transform: translateX(12px);
 }
 
-.quiz-banner {
-  display: flex;
-  align-items: center;
-}
-
-.quiz-banner--select {
-  background: var(--secondary-background-color);
-  padding: 12px;
-  border-radius: 12px;
-  margin-bottom: 12px;
-}
-
-.quiz-banner__img {
-  padding: 5.71px;
-  border-radius: 5px;
-  margin-right: 16px;
-  width: 40px;
-}
-
-.html > .quiz-banner__img {
-  background: var(--html);
-}
-
-.css > .quiz-banner__img {
-  background: var(--css);
-}
-
-.javascript > .quiz-banner__img {
-  background: var(--javascript);
-}
-
-.accessibility > .quiz-banner__img {
-  background: var(--accessibility);
-}
-
-.quiz-banner__text {
-  flex: 1;
-}
-
+/********************************
+QUIZ SELECT MENU
+*********************************/
 .welcome {
   margin-bottom: 40px;
 }
@@ -153,20 +149,21 @@ body {
   color: var(--gray-navy);
 }
 
-.progress {
-  height: 16px;
+.quiz-banner--select {
   background: var(--secondary-background-color);
-  border-radius: 16px;
-  padding: 4px;
-  position: relative;
-  margin-bottom: 40px;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  cursor: pointer;
 }
 
-.progress__meter {
-  background: var(--purple);
-  height: 8px;
-  width: 0%;
-  border-radius: 8px;
+/********************************
+DISPLAY QUIZ SELECTION
+*********************************/
+
+.quiz {
+  display: none;
+  flex-direction: column;
 }
 
 .question {
@@ -188,6 +185,7 @@ body {
   border-radius: 12px;
   margin-bottom: 12px;
   padding: 12px;
+  cursor: pointer;
 }
 
 .answer__selection {
@@ -212,6 +210,44 @@ body {
   width: 24px;
 }
 
+.answer__active {
+  border: 2px solid var(--purple);
+}
+
+.answer__active > .answer__selection {
+  background: var(--purple);
+  color: var(--pure-white);
+}
+
+.answer:hover .answer__selection {
+  background: var(--accessibility);
+  color: var(--purple);
+}
+
+/********************************
+QUIZ PROGRESS BAR
+*********************************/
+
+.progress {
+  height: 16px;
+  background: var(--secondary-background-color);
+  border-radius: 16px;
+  padding: 4px;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.progress__meter {
+  background: var(--purple);
+  height: 8px;
+  width: 0%;
+  border-radius: 8px;
+}
+
+/********************************
+QUIZ BUTTONS
+*********************************/
+
 .answer__btn,
 .play-again {
   width: 100%;
@@ -224,16 +260,17 @@ body {
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 12px;
+  cursor: pointer;
 }
 
-.answer__active {
-  border: 2px solid var(--purple);
+.answer__btn:hover,
+.play-again:hover {
+  background: var(--button-hover);
 }
 
-.answer__active > .answer__selection {
-  background: var(--purple);
-  color: var(--pure-white);
-}
+/********************************
+QUIZ FEEDBACK - RESULTS
+*********************************/
 
 .correct {
   border-color: var(--green);
@@ -312,6 +349,10 @@ body {
   color: var(--gray-navy);
 }
 
+/********************************
+DARKMODE SETTINGS
+*********************************/
+
 .dark {
   --primary-background-color: var(--dark-navy);
   --secondary-background-color: var(--navy);
@@ -319,6 +360,10 @@ body {
   --secondary-text: var(--light-bluish);
   --primary-background-img: url("../images/pattern-background-mobile-dark.svg");
 }
+
+/********************************
+TABLET VIEW
+*********************************/
 
 @media screen and (min-width: 768px) {
   :root {
@@ -425,6 +470,10 @@ body {
     font-size: 24px;
   }
 }
+
+/********************************
+DESKTOP VIEW
+*********************************/
 
 @media screen and (min-width: 1440px) {
   :root {
