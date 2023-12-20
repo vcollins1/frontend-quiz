@@ -148,7 +148,7 @@ answerBtn.addEventListener("click", e => {
 });
 
 playAgain.addEventListener("click", () => {
-    document.querySelector(".menu").style.display = "block";
+    document.querySelector(".menu").style.display = "flex";
     document.querySelector(".result").style.display = "none";
     quizHeader.classList.remove("html", "css", "accessibility", "javascript");
     quizHeader.querySelector(".quiz-banner__img").src = '';
